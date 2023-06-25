@@ -1,0 +1,507 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="Dialog.js"></script>
+        <script src="ajax.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <!-- other content of the head element goes here -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/default.min.css">
+        <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <h1>
+            Dialog.js Examples
+        </h1>
+        <div class="flex">
+            <div class="c1"></div>
+            <div class="container c6">
+                <section class="alert flex">
+                    <div class="c1"></div>
+                    <div class="c5">
+                        <h2 class="flex">
+                            <div class="c6">
+                                Dialog.Alert(string: txt, object: p = null) : void
+                            </div>
+                            <button type="button" id="alert" class="c1">Click Me!</button>
+                        </h2>
+                        
+                        <div class="flex">
+                            <div class="c6">
+                                <label for="alert_immediate">
+                                    Immediate Callback Result
+                                    <input type="text" disabled id="alert_immediate">
+                                </label>
+                            </div>
+                            <div class="c1"></div>
+                            <div class="c6">
+                                <label for="alert_ok_callback">
+                                    Ok Callback Result
+                                    <input type="text" disabled id="alert_ok_callback">
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <pre>
+                                <code class="js">
+document.getElementById("alert").addEventListener("click",(e)=>{
+    e.preventDefault() 
+    Dialog.Alert("This is a test",{
+        callback: function(p) {
+            console.log("immediate callback", p)
+            document.getElementById("alert_immediate").value = JSON.stringify(p)
+        },
+        callback_params: {
+            a:"foo",
+            b:"bar"
+        },
+        callback_ok: function(p) {
+            console.log("ok callback", p)
+            document.getElementById("alert_ok_callback").value = JSON.stringify(p)
+        },
+        callback_ok_params: {
+            a:"foo foo",
+            b:"bar bar"
+        },
+        style: `
+        button.ok {
+            text-align: center;
+            min-width: 50px;
+            margin: 10px 0 0 0;
+        }`
+    })
+})
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="c1"></div>
+                </section>
+                <hr>
+                <section class="confirm flex">
+                    <div class="c1"></div>
+                    <div class="c5">
+                        <h2 class="flex">
+                            <div class="c6">
+                                Dialog.Confirm(string: txt, object: p = null) : void
+                            </div>
+                            <button type="button" id="confirm" class="c1">Click Me!</button>
+                        </h2>
+                        
+                        <div class="flex">
+                            <div class="c6">
+                                <label for="confirm_immediate">
+                                    Immediate Callback Result
+                                    <input type="text" disabled id="confirm_immediate">
+                                </label>
+                            </div>
+                            <div class="c1"></div>
+                            <div class="c6">
+                                <label for="confirm_ok_callback">
+                                    Ok Callback Result
+                                    <input type="text" disabled id="confirm_ok_callback">
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <pre>
+                                <code class="js">
+document.getElementById("confirm").addEventListener("click",(e)=>{
+    e.preventDefault() 
+    Dialog.Confirm("Are you sure you want to do this?",{
+        callback: function(p) {
+            console.log("immediate callback", p)
+            document.getElementById("confirm_immediate").value = JSON.stringify(p)
+        },
+        callback_params: {
+            a:"foo",
+            b:"bar"
+        },
+        callback_ok: function(p) {
+            console.log("ok callback", p)
+            document.getElementById("confirm_ok_callback").value = JSON.stringify(p)
+        },
+        callback_ok_params: {
+            a:"foo foo",
+            b:"bar bar"
+        }
+    })
+})
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="c1"></div>
+                </section>
+                <hr>
+                <section class="prompttext flex">
+                    <div class="c1"></div>
+                    <div class="c5">
+                        <h2 class="flex">
+                            <div class="c6">
+                                Dialog.Prompt(string: txt, object: p = null) : void
+                            </div>
+                            <button type="button" id="prompttext" class="c1">Click Me!</button>
+                        </h2>
+                        
+                        <div class="flex">
+                            <div class="c6">
+                                <label for="prompttext_immediate">
+                                    Immediate Callback Result
+                                    <input type="text" disabled id="prompttext_immediate">
+                                </label>
+                            </div>
+                            <div class="c1"></div>
+                            <div class="c6">
+                                <label for="prompttext_ok_callback">
+                                    Ok Callback Params Result
+                                    <input type="text" disabled id="prompttext_ok_callback">
+                                </label>
+                            </div>
+                            <div class="c1"></div>
+                            <div class="c6">
+                                <label for="prompttext_ok_callback">
+                                    Ok Callback Answer Result
+                                    <input type="text" disabled id="prompttext_answer_callback">
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <pre>
+                                <code class="js">
+document.getElementById("prompttext").addEventListener("click",(e)=>{
+    e.preventDefault() 
+    Dialog.Prompt("Enter a number between 1-10",{
+        callback: function(p) {
+            console.log("immediate callback", p)
+            document.getElementById("prompttext_immediate").value = JSON.stringify(p)
+        },
+        callback_params: {
+            a:"foo",
+            b:"bar"
+        },
+        callback_ok: function(answer, p) {
+            console.log("ok callback", answer, p)
+            document.getElementById("prompttext_ok_callback").value = JSON.stringify(p)
+            document.getElementById("prompttext_answer_callback").value = JSON.stringify(p)
+        },
+        callback_ok_params: {
+            a:"foo foo",
+            b:"bar bar"
+        },
+        type:"text"
+    })
+})
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="c1"></div>
+                </section>
+                <hr>
+                <section class="promptrange flex">
+                    <div class="c1"></div>
+                    <div class="c5">
+                        <h2 class="flex">
+                            <div class="c6">
+                                Dialog.Prompt(string: txt, object: p = null) : void
+                            </div>
+                            <button type="button" id="promptrange" class="c1">Click Me!</button>
+                        </h2>
+                        
+                        <div class="flex">
+                            <div class="c6">
+                                <label for="promptrange_immediate">
+                                    Immediate Callback Result
+                                    <input type="text" disabled id="promptrange_immediate">
+                                </label>
+                            </div>
+                            <div class="c1"></div>
+                            <div class="c6">
+                                <label for="promptrange_ok_callback">
+                                    Ok Callback Params Result
+                                    <input type="text" disabled id="promptrange_ok_callback">
+                                </label>
+                            </div>
+                            <div class="c1"></div>
+                            <div class="c6">
+                                <label for="promptrange_ok_callback">
+                                    Ok Callback Answer Result
+                                    <input type="text" disabled id="promptrange_answer_callback">
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <pre>
+                                <code class="js">
+document.getElementById("promptrange").addEventListener("click",(e)=>{
+    e.preventDefault() 
+    Dialog.Prompt("Enter a number between 1-10",{
+        callback: function(p) {
+            console.log("immediate callback", p)
+            document.getElementById("promptrange_immediate").value = JSON.stringify(p)
+        },
+        callback_params: {
+            a:"foo",
+            b:"bar"
+        },
+        callback_ok: function(answer, p) {
+            console.log("ok callback", answer, p)
+            document.getElementById("promptrange_ok_callback").value = JSON.stringify(p)
+            document.getElementById("promptrange_answer_callback").value = JSON.stringify(p)
+        },
+        callback_ok_params: {
+            a:"foo foo",
+            b:"bar bar"
+        },
+        type:"range",
+        attr:{
+            min:1,
+            max:10  
+        }
+    })
+})
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="c1"></div>
+                </section>
+                <hr>
+                <template id="tcontainer">
+                    <h3>
+                        Input Form
+                    </h3>
+                    <form method="get">
+                        <div class="flex">
+                            <div class="c1">
+                                First Name
+                            </div>
+                            <div class="c1">
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="c1">
+                                Last Name
+                            </div>
+                            <div class="c1">
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="c1">
+                                Phone
+                            </div>
+                            <div class="c1">
+                                <input type="phone">
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="c3"></div>
+                            <button class="c1" type="submit">Submit</button>
+                            <div class="c3"></div>
+                        </div>
+                    </form>   
+                </template>
+                <section class="container flex">
+                    <div class="c1"></div>
+                    <div class="c5">
+                        <h2 class="flex">
+                            <div class="c6">
+                                Dialog.Container(string: title, string: template_id, object: p = null) : void
+                            </div>
+                            <button type="button" id="container" class="c1">Click Me!</button>
+                        </h2>
+                        <p>
+                            This method uses the HTML <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template" target="_blank">template</a> tag. Pass the ID of the template tag to the method using template_id.
+                        </p>
+                        <div>
+                            <pre>
+                                <code class="language-html">
+&lt;template id="tcontainer"&gt;
+    &lt;h3&gt;
+        Input Form
+    &lt;/h3&gt;
+    &lt;form method="get"&gt;
+        &lt;div class="flex"&gt;
+            &lt;div class="c1"&gt;
+                First Name
+            &lt;/div&gt;
+            &lt;div class="c1"&gt;
+                &lt;input type="text"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="flex"&gt;
+            &lt;div class="c1"&gt;
+                Last Name
+            &lt;/div&gt;
+            &lt;div class="c1"&gt;
+                &lt;input type="text"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="flex"&gt;
+            &lt;div class="c1"&gt;
+                Phone
+            &lt;/div&gt;
+            &lt;div class="c1"&gt;
+                &lt;input type="phone"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="flex"&gt;
+            &lt;div class="c3"&gt;&lt;/div&gt;
+            &lt;button class="c1" type="submit"&gt;Submit&lt;/button&gt;
+            &lt;div class="c3"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;   
+&lt;/template&gt;
+                                </code>
+                            </pre>
+                            <pre>
+                                <code class="js">
+document.getElementById("container").addEventListener("click",(e)=>{
+    e.preventDefault()
+    Dialog.Container("Test Title","tcontainer")
+})
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="c1"></div>
+                </section>
+                <hr>
+                <section class="ajaxcontainer flex">
+                    <div class="c1"></div>
+                    <div class="c5">
+                        <h2 class="flex">
+                            <div class="c6">
+                                Dialog.AjaxContainer(string: txt, object: p = null) : void
+                            </div>
+                            <button type="button" id="ajaxcontainer" class="c1">Click Me!</button>
+                        </h2>
+                        <div>
+                            <pre>
+                                <code class="js">
+document.getElementById("ajaxcontainer").addEventListener("click",(e)=>{
+    e.preventDefault()
+    Dialog.AjaxContainer("popup.html")
+})
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="c1"></div>
+                </section>
+            </div>
+            <div class="c1"></div>
+        </div>
+        <script>
+            document.getElementById("alert").addEventListener("click",(e)=>{
+                e.preventDefault() 
+                Dialog.Alert("This is a test",{
+                    callback: function(p) {
+                        console.log("immediate callback", p)
+                        document.getElementById("alert_immediate").value = JSON.stringify(p)
+                    },
+                    callback_params: {
+                        a:"foo",
+                        b:"bar"
+                    },
+                    callback_ok: function(p) {
+                        console.log("ok callback", p)
+                        document.getElementById("alert_ok_callback").value = JSON.stringify(p)
+                    },
+                    callback_ok_params: {
+                        a:"foo foo",
+                        b:"bar bar"
+                    },
+                    style: `
+                    button.ok {
+                        text-align: center;
+                        min-width: 50px;
+                        margin: 10px 0 0 0;
+                    }`
+                })
+            })
+            document.getElementById("confirm").addEventListener("click",(e)=>{
+                e.preventDefault() 
+                Dialog.Confirm("Are you sure you want to do this?",{
+                    callback: function(p) {
+                        console.log("immediate callback", p)
+                        document.getElementById("confirm_immediate").value = JSON.stringify(p)
+                    },
+                    callback_params: {
+                        a:"foo",
+                        b:"bar"
+                    },
+                    callback_ok: function(p) {
+                        console.log("ok callback", p)
+                        document.getElementById("confirm_ok_callback").value = JSON.stringify(p)
+                    },
+                    callback_ok_params: {
+                        a:"foo foo",
+                        b:"bar bar"
+                    }
+                })
+            })
+            document.getElementById("prompttext").addEventListener("click",(e)=>{
+                e.preventDefault() 
+                Dialog.Prompt("What is you favorite color",{
+                    callback: function(p) {
+                        console.log("immediate callback", p)
+                        document.getElementById("prompttext_immediate").value = JSON.stringify(p)
+                    },
+                    callback_params: {
+                        a:"foo",
+                        b:"bar"
+                    },
+                    callback_ok: function(answer, p) {
+                        console.log("ok callback", answer, p)
+                        document.getElementById("prompttext_ok_callback").value = JSON.stringify(p)
+                        document.getElementById("prompttext_answer_callback").value = answer
+                    },
+                    callback_ok_params: {
+                        a:"foo foo",
+                        b:"bar bar"
+                    },
+                    type:"text"
+                })
+            })
+            document.getElementById("promptrange").addEventListener("click",(e)=>{
+                e.preventDefault() 
+                Dialog.Prompt("Enter a number between 1-10",{
+                    callback: function(p) {
+                        console.log("immediate callback", p)
+                        document.getElementById("promptrange_immediate").value = JSON.stringify(p)
+                    },
+                    callback_params: {
+                        a:"foo",
+                        b:"bar"
+                    },
+                    callback_ok: function(answer, p) {
+                        console.log("ok callback", answer, p)
+                        document.getElementById("promptrange_ok_callback").value = JSON.stringify(p)
+                        document.getElementById("promptrange_answer_callback").value = answer
+                    },
+                    callback_ok_params: {
+                        a:"foo foo",
+                        b:"bar bar"
+                    },
+                    type:"range",
+                    attr:{
+                        min:1,
+                        max:10  
+                    }
+                })
+            })
+            document.getElementById("container").addEventListener("click",(e)=>{
+                e.preventDefault()
+                Dialog.Container("Test Title","tcontainer")
+            })
+            document.getElementById("ajaxcontainer").addEventListener("click",(e)=>{
+                e.preventDefault()
+                Dialog.AjaxContainer("popup.html")
+            })
+        </script>
+    </body>
+</html>
